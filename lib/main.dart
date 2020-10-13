@@ -1,3 +1,4 @@
+import 'package:expenses_app/widgets/chart.dart';
 import 'package:expenses_app/widgets/new_transaction.dart';
 import 'package:expenses_app/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((element) {
+      return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   void _addNewTransaction(String title, double amount) {
     final transactionToAdd = Transaction(
         id: DateTime.now().toString(),
@@ -97,11 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               width: double.infinity,
-              child: Card(
-                color: Theme.of(context).primaryColor,
-                child: Text('CHART!'),
-                elevation: 5,
-              ),
+              child: Chart(_recentTransactions),
             ),
             TransactionList(_transactions),
           ],
