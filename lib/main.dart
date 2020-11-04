@@ -62,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   bool _showChart = false;
-
   List<Transaction> get _recentTransactions {
     return _transactions.where((element) {
       return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
@@ -98,8 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final _mediaQuery = MediaQuery.of(context);
+    final _isLandscape = _mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text(
         'Personal Expenses',
@@ -111,9 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
     final txList = Container(
-        height: (MediaQuery.of(context).size.height -
+        height: (_mediaQuery.size.height -
                 appBar.preferredSize.height -
-                MediaQuery.of(context).padding.top) *
+                _mediaQuery.padding.top) *
             0.7,
         child: TransactionList(_transactions, _deleteTransaction));
     return Scaffold(
@@ -127,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if (isLandscape)
+            if (_isLandscape)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -141,21 +140,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       }),
                 ],
               ),
-            if (!isLandscape)
+            if (!_isLandscape)
               Container(
-                height: (MediaQuery.of(context).size.height -
+                height: (_mediaQuery.size.height -
                         appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
+                        _mediaQuery.padding.top) *
                     0.3,
                 child: Chart(_recentTransactions),
               ),
-            if (!isLandscape) txList,
-            if (isLandscape)
+            if (!_isLandscape) txList,
+            if (_isLandscape)
               _showChart
                   ? Container(
-                      height: (MediaQuery.of(context).size.height -
+                      height: (_mediaQuery.size.height -
                               appBar.preferredSize.height -
-                              MediaQuery.of(context).padding.top) *
+                              _mediaQuery.padding.top) *
                           0.7,
                       child: Chart(_recentTransactions),
                     )
