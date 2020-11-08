@@ -16,7 +16,7 @@ class TransactionList extends StatelessWidget {
                   'No transactions added yet!',
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 SizedBox(
@@ -35,13 +35,13 @@ class TransactionList extends StatelessWidget {
               final tx = _transactions[index];
               return Card(
                 elevation: 5,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                 child: ListTile(
                   leading: Container(
                     child: CircleAvatar(
                       radius: 30,
                       child: Padding(
-                        padding: EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(6),
                         child: FittedBox(
                           child: Text(
                               NumberFormat.simpleCurrency(locale: 'en_IN')
@@ -61,8 +61,8 @@ class TransactionList extends StatelessWidget {
                             _deleteTransaction(tx.id);
                           },
                           textColor: Theme.of(context).errorColor,
-                          icon: Icon(Icons.delete),
-                          label: Text('Delete'))
+                          icon: const Icon(Icons.delete),
+                          label: const Text('Delete'))
                       : IconButton(
                           icon: Icon(
                             Icons.delete,
