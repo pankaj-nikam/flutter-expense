@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   void _addNewTransaction(
       String title, double amount, DateTime transactionDate) {
     final transactionToAdd = Transaction(
-        id: DateTime.now().toString(),
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
         title: title,
         amount: amount,
         date: transactionDate);
